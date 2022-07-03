@@ -1,20 +1,20 @@
 package com.skilldistillery.jets.entities;
 
-public class Passenger extends Jet{
+public class CargoJet extends Jet implements CargoLoad {
 
-	public Passenger(String model, int speed, int range, double price) {
+	public CargoJet(String model, int speed, int range, double price) {
 		super(model, speed, range, price);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 //	@Override
 //	public String toString() {
-//		return "Passenger [toString()=" + super.toString() + ", getModel()=" + getModel() + ", getSpeed()=" + getSpeed()
+//		return "CargoJet [toString()=" + super.toString() + ", getModel()=" + getModel() + ", getSpeed()=" + getSpeed()
 //				+ ", getRange()=" + getRange() + ", getPrice()=" + getPrice() + ", getClass()=" + getClass()
 //				+ ", hashCode()=" + hashCode() + "]";
 //	}
 
-	@Override
+
 	public void fly() {
 		System.out.println( "Model: " + getModel() + ", Speed: "
 				+ getSpeed() + ", Range: " + getRange() + ", Price: " + getPrice());
@@ -22,5 +22,9 @@ public class Passenger extends Jet{
 		System.out.println();
 	}
 
-	
+	@Override
+	public void loadCargo() {
+		System.out.println("Loading CargoJet: " + getModel() + ". Please Hold wait for tansfer.");
+	}
+
 }

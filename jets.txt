@@ -1,5 +1,5 @@
 passenger,Cessna 172,20,100,120000
-cargo, Boeing 757, 918, 5435, 160000
+cargo,Boeing 757,918,5435,160000
 passenger,CleverGirl 101,742,3876,100000
-cargo, BigBoy 345, 756, 3457, 200000
-passenger,SuperSafe 001,60,3405,90000
+cargo,BigBoy 345,756,3457,200000
+fighter,SuperSafe 001,60,3405,90000

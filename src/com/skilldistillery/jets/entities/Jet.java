@@ -1,14 +1,18 @@
 package com.skilldistillery.jets.entities;
 
-public abstract class Jet {
 
+public abstract class Jet {
+//getsimplename    instance of
 		private String model;
 		private int speed;
 		private int range;
 		private double price;
+	
+	public void fly() {
 		
-
-		public Jets(String model, int speed, int range, double price) {
+	}
+		
+		public Jet(String model, int speed, int range, double price) {
 			super();
 			this.model = model;
 			this.speed = speed;
@@ -17,7 +21,7 @@ public abstract class Jet {
 		}
 		@Override
 		public String toString() {
-			return "Jets [model=" + model + ", speed=" + speed + ", range=" + range + ", price=" + price + "]";
+			return "[Model: " + model + ", Speed: " + speed + ", Range: " + range + ", Price: " + price + "]";
 		}
 		public String getModel() {
 			return model;

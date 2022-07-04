@@ -116,25 +116,62 @@ public class AirField {
 
 	}
 
+	public int tryCatchInt(int number) {
+		JetsApplication ja = new JetsApplication();
+		Scanner scan = ja.getScan();
+		boolean start = true;
+		do {
+			try {
+				number = scan.nextInt();
+				start = false;
+			} catch (Exception e) {
+				System.out.println("You must a number. Try again.");
+				scan.nextLine();
+				System.out.println();
+			}
+		} while (start);
+		return number;
+	}
+
+	public double tryCatchDouble(double number) {
+		JetsApplication ja = new JetsApplication();
+		Scanner scan = ja.getScan();
+		boolean start = true;
+		do {
+			try {
+				number = scan.nextInt();
+				start = false;
+			} catch (Exception e) {
+				System.out.println("You must a number. Try again.");
+				scan.nextLine();
+				System.out.println();
+			}
+		} while (start);
+		return number;
+	}
+
 	public void addJet() {
 		char p = '\u2708';
 		boolean start = true;
 		Jet newJet = null;
 		JetsApplication ja = new JetsApplication();
 		Scanner scan = ja.getScan();
-		
+
 		System.out.println("Enter the model of your Jet.");
 		String model = scan.nextLine();
 
+		int speed = 0;
 		System.out.println("Enter the speed of your Jet.");
-		int speed = scan.nextInt();
-		
+		speed = tryCatchInt(speed);
+
 		System.out.println("Enter the range of your Jet.");
-		int range = scan.nextInt();
-		
+		int range = 0;
+		range = tryCatchInt(range);
+
 		System.out.println("Enter the price of your Jet.");
-		double price = scan.nextDouble();
-		
+		double price = 0;
+		price = tryCatchDouble(price);
+
 		System.out.println();
 
 		while (start) {
@@ -146,7 +183,8 @@ public class AirField {
 			System.out.println("3. Passenger Jet");
 			System.out.println(p + "  " + p + "  " + p + "  " + p + "  " + p + "  " + p + "  " + p + "  " + p + "  " + p
 					+ "  " + p + "  " + p + "  " + p + "  " + p + "  ");
-			int choice = scan.nextInt();
+			int choice = 0;
+			choice = tryCatchInt(choice);
 
 			switch (choice) {
 			case 1:
@@ -167,70 +205,97 @@ public class AirField {
 			}
 		}
 		fleet.add(newJet);
-		
+
 	}
 
 	public void removeJet() {
-		JetsApplication ja = new JetsApplication();
-		Scanner scan = ja.getScan();
-		boolean removeMethod = true;
+
 		if (fleet.size() == 0) {
 			System.out.println("No more Jets. Please add more before removing more.");
 			return;
 
 		}
-		do {
-			System.out.println("Would you like to remove by 'number' or 'model'?"); // User must type in the string
-																					// number or model.
+		String userInput = null;
+		userInput = removeHelp(userInput);
+
+		if (userInput.equals("number")) {
+			System.out.println("Which jet would you like to remove by number?");
 			System.out.println();
-			String userInput = scan.nextLine();
+			for (Jet each : fleet) {
+				System.out.println("Number: " + fleet.indexOf(each) + " " + each);
+			}
+			tryCatchNumber();
+
+		} else if (userInput.equals("model")) {
+			System.out.println("Which jet would you like to remove by Model?");
+			System.out.println();
+			for (Jet each : fleet) {
+				System.out.println(each);
+			}
+			tryCatchModel();
+
+		}
+
+	}
+
+	public String removeHelp(String userInput) {
+		JetsApplication ja = new JetsApplication();
+		Scanner scan = ja.getScan();
+		boolean start = true;
+		System.out.println("Would you like to remove by 'number' or 'model'?");
+		System.out.println();
+		userInput = scan.nextLine();
+		while (start) {
 			if (!userInput.equals("number") && !userInput.equals("model")) {
 				System.out.println("ERROR!! You must type either 'model' or 'number' to start.");
+				userInput = scan.nextLine();
 			}
-
-			if (userInput.equals("number")) {
-				System.out.println("Which jet would you like to remove by number?");
-				System.out.println();
-				for (Jet each : fleet) {
-					System.out.println("Number: " + fleet.indexOf(each) + " " + each);
-				}
-
-				try {
-					int numRemoved = scan.nextInt();
-					fleet.remove(numRemoved);
-					removeMethod = false;
-				} catch (Exception e) {
-					System.out.println("You must enter the number of a jet listed.");
-					scan.nextLine();
-					System.out.println();
-				}
+			if (userInput.equals("number") || userInput.equals("model")) {
+				start = false;
 			}
-			else if (userInput.equals("model")) {
-				System.out.println("Which jet would you like to remove by Model?");
-				System.out.println();
+		}
+		return userInput;
+	}
+
+	public void tryCatchModel() {
+		JetsApplication ja = new JetsApplication();
+		Scanner scan = ja.getScan();
+		boolean start = true;
+		do {
+			try {
+				int index = 0;
+				String modRemoved = scan.nextLine();
 				for (Jet each : fleet) {
-					System.out.println(each);
-				}
-				try {
-					int index = 0;
-					String modRemoved = scan.nextLine();
-					for (Jet each : fleet) {
-						if (each.getModel().equals(modRemoved)) {
-							break;
-						}
-						index++;
+					if (each.getModel().equals(modRemoved)) {
+						break;
 					}
-					fleet.remove(index);
-					removeMethod = false;
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					System.out.println("You must enter the model of a jet listed.");
-					System.out.println();
+					index++;
 				}
-
+				fleet.remove(index);
+				start = false;
+			} catch (Exception e) {
+				System.out.println("You must enter the model of a jet listed.");
+				System.out.println();
 			}
+		} while (start);
 
-		} while (removeMethod);
+	}
+
+	public void tryCatchNumber() {
+		JetsApplication ja = new JetsApplication();
+		Scanner scan = ja.getScan();
+		boolean start = true;
+		do {
+			try {
+				int numRemoved = scan.nextInt();
+				fleet.remove(numRemoved);
+				start = false;
+			} catch (Exception e) {
+				System.out.println("You must enter the number of a jet listed.");
+				scan.nextLine();
+				System.out.println();
+			}
+		} while (start);
 
 	}
 }

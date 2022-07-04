@@ -45,7 +45,6 @@ public class JetsApplication {
 				choice = scan.nextInt();
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				System.out.println("Please enter a number.");
 				scan.nextLine();
 			}

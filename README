@@ -5,13 +5,23 @@ Application has multiple options for the user to manipulate a list of jets. On s
 made of 5 jets, but can loaded with any number about of jets, including zero. Once the fleet has been generated, the user will be able
 continuously use a menu option which allows them to either; list the fleet, fly all jets, load all cargo jets, fight all fighter jets 
 add more jets to the air field, remove air jets from the air field, determine the fastest and longest range of jets. The menu is printed
-until the user is done with the program and leaves the system.
+until the user is done with the program and leaves the system. The menu is operated through a switch logic which calls upon the airfield
+class to perform each action. Since the airfield class can not directly talk to the parent Jet class,
+while reading the file the List had to be generated through the children since they inherit the same characteristics as the parent Jet.
+Additionally, two separate interfaces were used to control either the Cargo Jets or the Fighter Jets. 
 
 ## Technology Used
 Jave, file I/O, Interfaces
 
 ## Lessons Learned
 This was a huge learning process and really taught what restrictions you have on abstract classes and their children. My level of knowledge
-on working with classes and interfaces really grew from this project. It did take a lot of time and I wanted to try some mroe stretch goals.
+on working with classes and interfaces really grew from this project. It did take a lot of time and I wanted to try some more stretch goals.
 I did experiment with try and catch's on most of the times a user needed to provide input. I was only able to incorporate it in the 
-remove jets and the menu option. The add jets had a lot of places where a user could cause an error.
+remove jets and the menu option. The add jets had a lot of places where a user could cause an error. Another issue I ran into was using
+too many scanners and found that when I ran it, the "normal" way I was used to running a scanner didn't work out. I was making too many
+scanners and the program didn't like that, so to fix that I just had one scanner in the JetsApplication class and just called upon it
+in the AirField class, which solved that issue. Upon further review, to make the try/catch blocks look cleaner, each variable I am
+trying to find should be its own method that returns the value, ie model, back to the addJet() method once the user correctly
+enters the right value. This would prevent repeated code as well.
+UPDATED: All areas where user input is needed are placed in try/catch's to prevent continuous use of app but only when correct
+information is given. 
